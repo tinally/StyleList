@@ -9,7 +9,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Home from './components/Home/Home';
 import ProductCard from './ProductCard';
-import Figure from './components/Figure/Figure'
+import Deck from './components/Deck/Deck'
 
 
 function App() {
@@ -19,12 +19,13 @@ function App() {
         <Navbar.Brand href="/">StyleList</Navbar.Brand>
         <Nav className="mr-auto">
           <Nav.Link href="products">Products</Nav.Link>
-          <Nav.Link href="figure">Figure</Nav.Link>
+          <Nav.Link href="deck">Deck</Nav.Link>
         </Nav>
       </Navbar>
       <Router>
         <Switch>
           <Route path="/products" component={ProductCard} />
+          <Route path="/deck" component={Deck} />
           <Route path="/figure" component={Figure} />
           <Route path="/" component={Home} />
         </Switch>
