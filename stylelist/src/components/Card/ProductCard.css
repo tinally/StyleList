@@ -32,9 +32,3 @@ img.card_image{
   border-top-right-radius: 50px;
   
 }
-
-.cover {
-    object-fit: cover;
-    width: 50px;
-    height: 100px;
-  }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSprings } from "react-spring/hooks";
 import { useGesture } from "react-with-gesture";
 
-import ProductCard from "../Card/ProductCard";
+import Card from "./Card";
 import data from "./data.js";
 
 import "./Deck.css";
@@ -11,18 +11,14 @@ const to = i => ({
   x: 0,
   y: i * -10,
   scale: 1,
-  rot: -10 + Math.random() * 10,
+  rot: -10 + Math.random() * 20,
   delay: i * 100
 });
 const from = i => ({ rot: 0, scale: 1.5, y: -1000 });
 
-// const trans = (r, s) =>
-//   `perspective(1500px) rotateX(0deg) rotateY(${r /
-//     9}deg) rotateZ(${r}deg) scale(${s})`;
-
 const trans = (r, s) =>
-  `perspective(1500px) rotateX(0 deg) rotateY(${r /
-    0}deg) rotateZ(0deg) scale(${s})`;
+  `perspective(1500px) rotateX(30deg) rotateY(${r /
+    10}deg) rotateZ(${r}deg) scale(${s})`;
 
 function Deck() {
   const [gone] = useState(() => new Set());
@@ -37,19 +33,15 @@ function Deck() {
       args: [index],
       down,
       delta: [xDelta],
+      distance,
       direction: [xDir],
       velocity
     }) => {
-      const trigger = velocity > 0.5;
+      const trigger = velocity > 0.2;
 
       const dir = xDir < 0 ? -1 : 1;
 
-      if (!down && trigger){
-        gone.add(index);
-        console.log(index)
-        let direction = xDir < 0 ? "left" : "right"
-        console.log(direction)
-      } 
+      if (!down && trigger) gone.add(index);
 
       set(i => {
         if (index !== i) return;
@@ -75,7 +67,7 @@ function Deck() {
   );
 
   return props.map(({ x, y, rot, scale }, i) => (
-    <ProductCard
+    <Card
       i={i}
       x={x}
       y={y}
