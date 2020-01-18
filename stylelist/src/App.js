@@ -1,24 +1,35 @@
 import React from 'react';
 import logo from './logo.svg';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
 import './App.css';
+import ProductCard from './ProductCard';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p className="mb-5">
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Navbar bg="dark" variant="dark">
+        <Navbar.Brand href="/">StyleList</Navbar.Brand>
+        <Nav className="mr-auto">
+          <Nav.Link href="products">Products</Nav.Link>
+        </Nav>
+      </Navbar>
+      <Router>
+        <div className="App">
+          <Switch>
+            <Route path="/products">
+              <ProductCard />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+      <ProductCard />
     </div>
   );
 }
