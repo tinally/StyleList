@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSprings } from "react-spring/hooks";
 import { useGesture } from "react-with-gesture";
 
-import Card from "../Card/Card";
+import ProductCard from "../Card/ProductCard";
 import data from "./data.js";
 
 import "./Deck.css";
@@ -34,11 +34,10 @@ function Deck() {
       args: [index],
       down,
       delta: [xDelta],
-      distance,
       direction: [xDir],
       velocity
     }) => {
-      const trigger = velocity > 0.2;
+      const trigger = velocity > 0.5;
 
       const dir = xDir < 0 ? -1 : 1;
 
@@ -56,7 +55,6 @@ function Deck() {
         const x = isGone ? (200 + window.innerWidth) * dir : down ? xDelta : 0;
 
         const rot = xDelta / 100 + (isGone ? dir * 10 * velocity : 0);
-        // const rot = 0;
 
         const scale = down ? 1.1 : 1;
         return {
@@ -74,7 +72,7 @@ function Deck() {
   );
 
   return props.map(({ x, y, rot, scale }, i) => (
-    <Card
+    <ProductCard
       i={i}
       x={x}
       y={y}

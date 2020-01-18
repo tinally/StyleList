@@ -15,6 +15,13 @@ export default [
         color_url_list:["https://n.nordstrommedia.com/id/sr3/c6cf4b3d-64e9-440a-8c5d-f74c333f58f3.jpeg?crop=fit&w=31&h=31"],
         price: 931
       },
-      
+      {
+        product_name: "Roxwell Vintage Check Hood Thermoregulated Quilted Coat",
+        img_url: "https://n.nordstrommedia.com/id/sr3/4be64dbd-37d2-4c3b-be6b-944c2065badf.jpeg?crop=pad&pad_color=FFF&format=jpeg&w=1660&h=2546",
+        product_url: "https://shop.nordstrom.com/s/gucci-jacquard-stripe-sleeve-pique-polo/4787761/full?origin=category-personalizedsort&breadcrumb=Home%2FBrands%2FGucci&color=black",
+        details: "This diamond-quilted coat features innovative 37.5® thermoregulation technology that both evaporates moisture and traps body heat to keep you comfortable.",
+        color_url_list:["https://n.nordstrommedia.com/id/sr3/73634bea-b154-4f69-9a2a-ef00e7641424.jpeg?crop=fit&w=31&h=31", "https://n.nordstrommedia.com/id/sr3/73634bea-b154-4f69-9a2a-ef00e7641424.jpeg?crop=fit&w=31&h=31"],
+        price: 1301.50
+      },
     
   ];

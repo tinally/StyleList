@@ -1,0 +1,40 @@
+img.color_bar {
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  border: 2px solid rgb(194, 194, 194);
+  box-shadow: 0 0 5px rgb(0, 0, 0);
+}
+h2 {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+h2:nth-of-type(2) {
+  opacity: 0.7;
+  font-size: 1.35rem;
+}
+
+h5 {
+  margin-top: -15px;
+  margin-left: 2px;
+  color: lightgray;
+}
+h5:last-of-type {
+  color: darkgray;
+}
+
+img.card_image{
+  height: 500px;
+  object-fit: cover;
+  object-position: 0% 20%;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 50px;
+  
+}
+
+.cover {
+    object-fit: cover;
+    width: 50px;
+    height: 100px;
+  }
