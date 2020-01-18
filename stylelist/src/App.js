@@ -8,25 +8,24 @@ import {
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Home from './components/Home/Home';
-import ProductCard from './ProductCard';
+import ProductCard from './components/Card/ProductCard';
 import Deck from './components/Deck/Deck'
 
 
 function App() {
   return (
     <div className="background">
-      <Navbar bg="dark" variant="dark">
+      {/* <Navbar bg="dark" variant="dark">
         <Navbar.Brand href="/">StyleList</Navbar.Brand>
         <Nav className="mr-auto">
           <Nav.Link href="products">Products</Nav.Link>
           <Nav.Link href="deck">Deck</Nav.Link>
         </Nav>
-      </Navbar>
+      </Navbar> */}
       <Router>
         <Switch>
           <Route path="/products" component={ProductCard} />
           <Route path="/deck" component={Deck} />
-          <Route path="/figure" component={Figure} />
           <Route path="/" component={Home} />
         </Switch>
       </Router>
