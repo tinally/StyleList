@@ -10,7 +10,7 @@ import {
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import ProductCard from './ProductCard';
-import Figure from './components/Figure/Figure'
+import Deck from './components/Deck/Deck'
 
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
         <Navbar.Brand href="/">StyleList</Navbar.Brand>
         <Nav className="mr-auto">
           <Nav.Link href="products">Products</Nav.Link>
-          <Nav.Link href="figure">Figure</Nav.Link>
+          <Nav.Link href="deck">Deck</Nav.Link>
         </Nav>
       </Navbar>
       <Router>
@@ -32,7 +32,7 @@ function App() {
           </Switch>
         </div> */}
         <Route path="/products" component={ProductCard} />
-        <Route path="/figure" component={Figure} />
+        <Route path="/deck" component={Deck} />
       </Router>
       
     </>
