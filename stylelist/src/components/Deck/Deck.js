@@ -45,6 +45,8 @@ function Deck() {
       if (!down && trigger){
         gone.add(index);
         console.log(index)
+        let direction = xDir < 0 ? "left" : "right"
+        console.log(direction)
       } 
 
       set(i => {
