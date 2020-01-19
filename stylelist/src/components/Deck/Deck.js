@@ -80,12 +80,12 @@ console.log(liked, disliked);
 
 function Deck() { // TODO: Change Deck into a stateful component
   const [flipped, flip] = useState(false);
-  const [data, setData] = useState(flipped ? data_one : data_two); // TODO: Change data into state
+  const [data, setData] = useState(flipped ? data_one : data_two); //TODO: PLACEHOLDER
   axios.get('http://localhost:5000/suggestions', { params: { liked: liked.join(","), disliked: disliked.join(",") } }).then((response) => {
     setData(response); // TODO: Mould response into data
   }).catch(error => {
     console.log(error)
-    setData(data_one);
+    setData(flipped ? data_one : data_two); // Fallback incase backend is dead or unavailable
     console.log(data);
   });
 
@@ -113,9 +113,9 @@ function Deck() { // TODO: Change Deck into a stateful component
         console.log(index)
         let direction = xDir < 0 ? "left" : "right"
         console.log(direction)
-        if (direction === 'left' && !disliked.includes(index)) {
-          disliked.push(index);
-        } else if (!liked.includes(index)) {
+        if (direction === 'left' && !disliked.includes(index.toString())) {
+          disliked.push(index); //ahould be id
+        } else if (!liked.includes(index.toString())) {
           liked.push(index);
         }
       }
