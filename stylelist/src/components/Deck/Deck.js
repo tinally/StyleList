@@ -77,7 +77,7 @@ function Deck() {
       direction: [xDir],
       velocity
     }) => {
-      const trigger = velocity > 0.5;
+      const trigger = velocity > 0.01;
 
       const dir = xDir < 0 ? -1 : 1;
 
