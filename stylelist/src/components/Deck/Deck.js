@@ -4,6 +4,7 @@ import { useGesture } from "react-with-gesture";
 
 import ProductCard from "../Card/ProductCard";
 import "./Deck.css";
+import axios from "axios";
 
 const data_one = [
   {
@@ -42,14 +43,14 @@ const data_two =
       details: "Gucci-branded stripe trim edges the shoulders of a classic stretch-piqué polo topped with a contrasting tipped collar.",
       color_url_list: ["https://n.nordstrommedia.com/id/sr3/c6cf4b3d-64e9-440a-8c5d-f74c333f58f3.jpeg?crop=fit&w=31&h=31"],
       price: 931
-    },{
+    }, {
       product_name: "Jacquard Stripe Sleeve Piqué Polo",
       img_url: "https://n.nordstrommedia.com/id/sr3/59069faa-6f1b-4144-ab43-66c3d780ad6d.jpeg?crop=pad&pad_color=FFF&format=jpeg&w=780&h=1196",
       product_url: "https://shop.nordstrom.com/s/gucci-jacquard-stripe-sleeve-pique-polo/4787761/full?origin=category-personalizedsort&breadcrumb=Home%2FBrands%2FGucci&color=black",
       details: "Gucci-branded stripe trim edges the shoulders of a classic stretch-piqué polo topped with a contrasting tipped collar.",
       color_url_list: ["https://n.nordstrommedia.com/id/sr3/c6cf4b3d-64e9-440a-8c5d-f74c333f58f3.jpeg?crop=fit&w=31&h=31"],
       price: 931
-    },{
+    }, {
       product_name: "Jacquard Stripe Sleeve Piqué Polo",
       img_url: "https://n.nordstrommedia.com/id/sr3/59069faa-6f1b-4144-ab43-66c3d780ad6d.jpeg?crop=pad&pad_color=FFF&format=jpeg&w=780&h=1196",
       product_url: "https://shop.nordstrom.com/s/gucci-jacquard-stripe-sleeve-pique-polo/4787761/full?origin=category-personalizedsort&breadcrumb=Home%2FBrands%2FGucci&color=black",
@@ -79,7 +80,7 @@ const trans = (r, s) =>
 function Deck() {
   const [flipped, flip] = useState(false);
   const data = flipped ? data_one : data_two;
-  
+
   const [gone] = useState(() => new Set());
 
   const [props, set] = useSprings(data.length, i => ({
@@ -128,6 +129,10 @@ function Deck() {
         // api call to backend
         flip(!flipped);
         console.log(flipped);
+        // axios.get('http://localhost:5000/suggestions', { params: { liked: "", disliked: "" } }).then((response) => {
+        //   console.log(response)
+        // })
+
         setTimeout(() => gone.clear() || set(i => to(i)), 600);
       }
     }
@@ -135,17 +140,17 @@ function Deck() {
 
   return <div className="card-deck">
     {props.map(({ x, y, rot, scale }, i) => (
-    <ProductCard className="p-5"
-      i={i}
-      x={x}
-      y={y}
-      rot={rot}
-      scale={scale}
-      trans={trans}
-      data={data}
-      bind={bind}
-    />
-  ))}</div>
+      <ProductCard className="p-5"
+        i={i}
+        x={x}
+        y={y}
+        rot={rot}
+        scale={scale}
+        trans={trans}
+        data={data}
+        bind={bind}
+      />
+    ))}</div>
 }
 
 export default Deck;
