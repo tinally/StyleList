@@ -6,12 +6,17 @@ import { Button, Col, Row, Form, Carousel, Navbar } from "react-bootstrap";
 import TypingEffect from "../TypingEffect/TypingEffect";
 import FooterNav from "../Nav/FooterNav";
 
+import { useHistory } from "react-router-dom";
+
 function Home() {
   const items = ["shoes", "shirts", "dresses", "jackets", "jeans"];
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(null);
 
   const [searchValue, setValue] = useState("");
+
+  const history = useHistory();
+
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
@@ -32,6 +37,7 @@ function Home() {
 
   const selectProduct = product => {
     console.log(`Selected Product: ${product}`);
+    history.push("/deck");
   };
 
   return (
@@ -43,7 +49,7 @@ function Home() {
           onSelect={handleSelect}
         >
           <Carousel.Item>
-            <img className="d-block w-100" src="./slide2.png" height="650em" />
+            <img className="d-block w-100" src="./slide2.png" height="550em" />
             <Carousel.Caption>
               <TypingEffect word={"STYLE-LIST"} colorWhite={false} />
 
@@ -54,7 +60,7 @@ function Home() {
             <img
               className="d-block w-100"
               src="./slide1.5.png"
-              height="650em"
+              height="550em"
             />
             <Carousel.Caption>
               <TypingEffect word={"Daily Delivery"} colorWhite={false} />
@@ -62,7 +68,7 @@ function Home() {
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img className="d-block w-100" src="./slide3.png" height="650em" />
+            <img className="d-block w-100" src="./slide3.png" height="550em" />
             <Carousel.Caption>
               <TypingEffect word={"Live on the edge"} colorWhite={true} />
               <p></p>
@@ -95,6 +101,7 @@ function Home() {
                 Shoes
               </Button>
               <Button
+                href="deck"
                 variant="outline-pink"
                 onClick={() => selectProduct("jackets")}
               >
