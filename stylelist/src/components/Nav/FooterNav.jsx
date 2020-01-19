@@ -5,8 +5,9 @@ import { FaGithub } from "react-icons/fa";
 export default class FooterNav extends Component {
   render() {
     return (
+        
         <footer>
-        <div class="footer" id="footer">
+        <div class="footer fixed-bottom" fixed="bootom" id="footer">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
@@ -35,19 +36,7 @@ export default class FooterNav extends Component {
  
         </div>
 
-        <div class="footer-bottom">
-            <div class="container">
-                <p class="pull-left"> Copyright © 2019, FALLCSC309team41. All rights reserved.</p>
-                <div class="pull-right">
-                    <ul class="nav nav-pills payments">
-                        <li><i class="fa fa-cc-visa"></i></li>
-                        <li><i class="fa fa-cc-mastercard"></i></li>
-                        <li><i class="fa fa-cc-amex"></i></li>
-                        <li><i class="fa fa-cc-paypal"></i></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+
    
     </footer>
     );

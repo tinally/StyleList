@@ -1,11 +1,9 @@
 import React from 'react';
 import './Home.css';
 import { useState } from 'react';
-import Carousel from 'react-bootstrap/Carousel'
-import Form from 'react-bootstrap/Form'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
+
+import {Button, Col, Row, Form, Carousel, Navbar} from 'react-bootstrap'
+import FooterNav from '../Nav/FooterNav'
 
 function Home() {
   const items = ['shoes', 'shirts', 'dresses', 'jackets', 'jeans'];
@@ -96,6 +94,8 @@ function Home() {
           </Col>
         </Form.Row>
       </Form.Group>
+
+
     </div>
   );
 }

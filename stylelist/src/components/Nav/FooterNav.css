@@ -4,6 +4,7 @@
 	padding-bottom: 30px;
 	position: relative;
 	width: 100%;
+	bottom: 0px;
 	border-bottom: 1px solid #CCCCCC;
 	border-top: 1px solid #DDDDDD;
 }
@@ -75,18 +76,3 @@
 	color: rgb(41, 169, 255);
   }
 
-/* .media-icon::after {
-	content: "";
-	display: block;
-	width: 0px;
-	height: 2px;
-	color: #0649c5;
-	transition: 0.2s;
-}
-.media-icon:hover::after {
-	width: 100%;
-	color: #0649c5;
-}
-.footer a .media-icon{
-	color: cadetblue;
-} */

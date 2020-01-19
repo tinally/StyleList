@@ -1,6 +1,8 @@
-/* .home {
+.home {
   text-align: center;
   background-color: #282c34;
   font-size: calc(10px + 2vmin);
   color: white;
-} */
+  height: 100%;
+  bottom: 0px;
+}
