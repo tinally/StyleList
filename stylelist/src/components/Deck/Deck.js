@@ -42,6 +42,20 @@ const data_two =
       details: "Gucci-branded stripe trim edges the shoulders of a classic stretch-piqué polo topped with a contrasting tipped collar.",
       color_url_list: ["https://n.nordstrommedia.com/id/sr3/c6cf4b3d-64e9-440a-8c5d-f74c333f58f3.jpeg?crop=fit&w=31&h=31"],
       price: 931
+    },{
+      product_name: "Jacquard Stripe Sleeve Piqué Polo",
+      img_url: "https://n.nordstrommedia.com/id/sr3/59069faa-6f1b-4144-ab43-66c3d780ad6d.jpeg?crop=pad&pad_color=FFF&format=jpeg&w=780&h=1196",
+      product_url: "https://shop.nordstrom.com/s/gucci-jacquard-stripe-sleeve-pique-polo/4787761/full?origin=category-personalizedsort&breadcrumb=Home%2FBrands%2FGucci&color=black",
+      details: "Gucci-branded stripe trim edges the shoulders of a classic stretch-piqué polo topped with a contrasting tipped collar.",
+      color_url_list: ["https://n.nordstrommedia.com/id/sr3/c6cf4b3d-64e9-440a-8c5d-f74c333f58f3.jpeg?crop=fit&w=31&h=31"],
+      price: 931
+    },{
+      product_name: "Jacquard Stripe Sleeve Piqué Polo",
+      img_url: "https://n.nordstrommedia.com/id/sr3/59069faa-6f1b-4144-ab43-66c3d780ad6d.jpeg?crop=pad&pad_color=FFF&format=jpeg&w=780&h=1196",
+      product_url: "https://shop.nordstrom.com/s/gucci-jacquard-stripe-sleeve-pique-polo/4787761/full?origin=category-personalizedsort&breadcrumb=Home%2FBrands%2FGucci&color=black",
+      details: "Gucci-branded stripe trim edges the shoulders of a classic stretch-piqué polo topped with a contrasting tipped collar.",
+      color_url_list: ["https://n.nordstrommedia.com/id/sr3/c6cf4b3d-64e9-440a-8c5d-f74c333f58f3.jpeg?crop=fit&w=31&h=31"],
+      price: 931
     }
   ];
 
@@ -119,7 +133,8 @@ function Deck() {
     }
   );
 
-  return props.map(({ x, y, rot, scale }, i) => (
+  return <div className="card-deck">
+    {props.map(({ x, y, rot, scale }, i) => (
     <ProductCard className="p-5"
       i={i}
       x={x}
@@ -130,7 +145,7 @@ function Deck() {
       data={data}
       bind={bind}
     />
-  ));
+  ))}</div>
 }
 
 export default Deck;

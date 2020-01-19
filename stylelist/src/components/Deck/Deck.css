@@ -23,7 +23,7 @@
     height: 100%;
   } 
   
-  #root > div {
+  .card-deck {
     position: absolute;
     width: 100vw;
     height: 100vh;
@@ -33,7 +33,7 @@
     justify-content: center;
   }
   
-  #root > div > div {
+  .card-deck > div {
     padding: 5px;
     background-color: white;
     background-size: auto 85%;

@@ -30,7 +30,7 @@ function App() {
           <Route path="/" component={Home} />
         </Switch>
       </Router>
-      <FooterNav />
+      {/* <FooterNav /> */}
     </div>
   );
 
