@@ -77,9 +77,22 @@ const trans = (r, s) =>
   `perspective(1500px) rotateX(0 deg) rotateY(${r /
   0}deg) rotateZ(0deg) scale(${s})`;
 
+const liked = window.localStorage.getItem('liked') ? window.localStorage.getItem('liked').split(',') : [];
+const disliked = window.localStorage.getItem('disliked') ? window.localStorage.getItem('disliked').split(',') : [];
+
+console.log(liked, disliked);
+
 function Deck() {
+  const [finished, finish] = useState(false);
   const [flipped, flip] = useState(false);
-  const data = flipped ? data_one : data_two;
+  let data = flipped ? data_one : data_two;
+  axios.get('http://localhost:5000/suggestions', { params: { liked: liked.join(","), disliked: disliked.join(",") } }).then((response) => {
+    // console.log(response);
+    data = response;
+    finish(true);
+  }).catch(error => {
+    finish(true);
+  });
 
   const [gone] = useState(() => new Set());
 
@@ -105,6 +118,11 @@ function Deck() {
         console.log(index)
         let direction = xDir < 0 ? "left" : "right"
         console.log(direction)
+        if (direction === 'left' && !disliked.includes(index)) {
+          disliked.push(index);
+        } else if (!liked.includes(index)) {
+          liked.push(index);
+        }
       }
 
       set(i => {
@@ -128,11 +146,9 @@ function Deck() {
       if (!down && gone.size === data.length) {
         // api call to backend
         flip(!flipped);
-        console.log(flipped);
-        // axios.get('http://localhost:5000/suggestions', { params: { liked: "", disliked: "" } }).then((response) => {
-        //   console.log(response)
-        // })
-
+        console.log(liked.join(","), disliked.join(","));
+        window.localStorage.setItem('liked', liked);
+        window.localStorage.setItem('disliked', disliked);
         setTimeout(() => gone.clear() || set(i => to(i)), 600);
       }
     }
