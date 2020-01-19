@@ -10,11 +10,12 @@ import Nav from 'react-bootstrap/Nav'
 import Home from './components/Home/Home';
 import ProductCard from './components/Card/ProductCard';
 import Deck from './components/Deck/Deck'
+import FooterNav from './components/Nav/FooterNav'
 
 
 function App() {
   return (
-    <div className="background">
+    <div className="bg">
       {/* <Navbar bg="dark" variant="dark">
         <Navbar.Brand href="/">StyleList</Navbar.Brand>
         <Nav className="mr-auto">
@@ -29,6 +30,7 @@ function App() {
           <Route path="/" component={Home} />
         </Switch>
       </Router>
+      <FooterNav />
     </div>
   );
 

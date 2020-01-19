@@ -41,7 +41,7 @@ class ProductCard extends React.Component {
                   />
                 );
               })}
-          <Card className="product-card" style={{ width: "20rem", minHeight: "200px" }}>
+          <Card className="product-card" style={{ width: "20rem", minHeight: "200px", maxHeight:"400rpx" }}>
             
             <Card.Img className="card_image" variant="top" src={img_url} />
             <Card.Body>

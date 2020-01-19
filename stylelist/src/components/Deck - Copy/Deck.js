@@ -75,7 +75,7 @@ function Deck() {
   );
 
   return props.map(({ x, y, rot, scale }, i) => (
-    <ProductCard className="p-5"
+    <ProductCard
       i={i}
       x={x}
       y={y}
