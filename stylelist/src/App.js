@@ -7,8 +7,8 @@ import {
 } from "react-router-dom";
 import Home from './components/Home/Home';
 import ProductCard from './components/Card/ProductCard';
-import Deck from './components/Deck/Deck'
-
+import Deck from './components/Deck/Deck';
+import TopNavbar from './components/Nav/TopNavbar';
 
 function App() {
   return (
@@ -20,6 +20,7 @@ function App() {
           <Nav.Link href="deck">Deck</Nav.Link>
         </Nav>
       </Navbar> */}
+      <TopNavbar />
       <Router>
         <Switch>
           <Route path="/products" component={ProductCard} />
