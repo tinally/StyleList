@@ -69,10 +69,6 @@ const to = i => ({
 });
 const from = i => ({ rot: 0, scale: 1.5, y: -1000 });
 
-// const trans = (r, s) =>
-//   `perspective(1500px) rotateX(0deg) rotateY(${r /
-//     9}deg) rotateZ(${r}deg) scale(${s})`;
-
 const trans = (r, s) =>
   `perspective(1500px) rotateX(0 deg) rotateY(${r /
   0}deg) rotateZ(0deg) scale(${s})`;
@@ -82,16 +78,15 @@ const disliked = window.localStorage.getItem('disliked') ? window.localStorage.g
 
 console.log(liked, disliked);
 
-function Deck() {
-  const [finished, finish] = useState(false);
+function Deck() { // TODO: Change Deck into a stateful component
   const [flipped, flip] = useState(false);
-  let data = flipped ? data_one : data_two;
+  const [data, setData] = useState(flipped ? data_one : data_two); // TODO: Change data into state
   axios.get('http://localhost:5000/suggestions', { params: { liked: liked.join(","), disliked: disliked.join(",") } }).then((response) => {
-    // console.log(response);
-    data = response;
-    finish(true);
+    setData(response); // TODO: Mould response into data
   }).catch(error => {
-    finish(true);
+    console.log(error)
+    setData(data_one);
+    console.log(data);
   });
 
   const [gone] = useState(() => new Set());
