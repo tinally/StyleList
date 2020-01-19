@@ -79,12 +79,12 @@ def preprocess(df):
         labeled_questions.append(TaggedDocument(final_q1.split() + final_q2.split(), df[df.index == index].id))
     return labeled_questions
 
-def find5largest(scores):
+def find3largest(scores):
     temp = scores[:]
     temp.sort()
     temp = temp[::-1]
     indices = []
-    for i in range(5):
+    for i in range(3):
         val = temp[i]
         indices.append(scores.index(val))
     return indices
@@ -98,7 +98,7 @@ def finder():
     print(len(df))
     if likes == "" and dislikes == "":
         max_indices = []
-        for i in range(5):
+        for i in range(3):
             c = np.random.randint(df.shape[0]-1)
             while c in max_indices:
                 c = np.random.randint(df.shape[0]-1)
@@ -106,7 +106,7 @@ def finder():
     elif likes == "" and dislikes != "":
         dislikes_indices = [int(i) for i in dislikes.split(",")]
         max_indices = []
-        for i in range(5):
+        for i in range(3):
             c = np.random.randint(df.shape[0]-1)
             while c in max_indices or c in dislikes_indices:
                 c = np.random.randint(df.shape[0]-1)
@@ -121,13 +121,13 @@ def finder():
             else:
                 dislikes_indices = [int(i) for i in dislikes.split(",")]
                 scores = get_similarity_scores(df, target, likes_indices, dislikes_indices)
-            max_indices = find5largest(scores)
+            max_indices = find3largest(scores)
             for elem in max_indices:
                 if elem not in dict.keys() or dict[elem] < scores[elem]:
                     dict[elem] = scores[elem]
         sorted_dict = sorted(dict.items(), key=lambda x: x[1], reverse=True)
         max_indices = []
-        for tup in sorted_dict[:5]:
+        for tup in sorted_dict[:3]:
             max_indices.append(tup[0])
 
     output = ""

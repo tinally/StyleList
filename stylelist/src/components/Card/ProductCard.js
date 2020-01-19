@@ -48,7 +48,7 @@ class ProductCard extends React.Component {
               <Card.Text>
               {details}
               </Card.Text>
-              <Button className="mr-1" variant="outline-dark">Dive</Button>
+              <Button className="mr-1" variant="outline-dark" href={data[i].link} target="_blank">Dive</Button>
             </Card.Body>
           </Card>
           {/* <div className="card">
