@@ -1,8 +1,8 @@
-* {
+/* * {
     box-sizing: border-box;
   }
   
- /* html,
+ html,
   body {
     overscroll-behavior-y: contain;
     margin: 0;
@@ -13,7 +13,7 @@
     font-family: Raleway, sans-serif;
     position: fixed;
     overflow: hidden;
-  }  */
+  } 
   
   #root {
     background-image: url("/bg.jpg");
@@ -59,13 +59,13 @@
   
 
   
-  /* .card > div {
+  .card > div {
     height: 380px !important;
   }
   
   .card {
     height: 500px !important;
-  } */
+  }
   
   .slider-control-bottomcenter {
     bottom: -15px !important;
@@ -73,4 +73,4 @@
   
   .slider-control-bottomcenter > ul > li > button {
     color: salmon !important;
-  }
+  } */

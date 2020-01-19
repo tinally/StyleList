@@ -3,6 +3,7 @@ import './Home.css';
 import { useState } from 'react';
 
 import {Button, Col, Row, Form, Carousel, Navbar} from 'react-bootstrap'
+import TypingEffect from '../TypingEffect/TypingEffect'
 import FooterNav from '../Nav/FooterNav'
 
 function Home() {
@@ -41,10 +42,11 @@ function Home() {
             <img
               className="d-block w-100"
               src="https://componentblox.com/wp-content/uploads/img-115.jpg"
-              height="300em"
+              height="650em"
             />
             <Carousel.Caption>
-              <h3>FASHION</h3>
+              <TypingEffect word={"STYLE-LIST"}/>
+  
               <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
             </Carousel.Caption>
           </Carousel.Item>
@@ -52,10 +54,10 @@ function Home() {
             <img
               className="d-block w-100"
               src="https://componentblox.com/wp-content/uploads/img-116.jpg"
-              height="300em"
+              height="650em"
             />
             <Carousel.Caption>
-              <h3>STYLE</h3>
+            <TypingEffect word={"Daily Delivery"}/>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </Carousel.Caption>
           </Carousel.Item>
@@ -63,10 +65,10 @@ function Home() {
             <img
               className="d-block w-100"
               src="https://componentblox.com/wp-content/uploads/img-117.jpg"
-              height="300em"
+              height="650em"
             />
             <Carousel.Caption>
-              <h3>FIND TRENDS</h3>
+            <TypingEffect word={"Live on the edge"}/>
               <p>
                 Praesent commodo cursus magna, vel scelerisque nisl consectetur.
           </p>

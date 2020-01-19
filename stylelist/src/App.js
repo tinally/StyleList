@@ -15,7 +15,7 @@ import FooterNav from './components/Nav/FooterNav'
 
 function App() {
   return (
-    <div className="bg">
+    <div className="background" >
       {/* <Navbar bg="dark" variant="dark">
         <Navbar.Brand href="/">StyleList</Navbar.Brand>
         <Nav className="mr-auto">
