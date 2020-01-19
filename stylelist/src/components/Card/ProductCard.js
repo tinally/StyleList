@@ -5,7 +5,7 @@ import { Card, Button } from "react-bootstrap";
 import "./ProductCard.css";
 class ProductCard extends React.Component {
   render() {
-    const { i, x, y, rot, scale, trans, bind, data } = this.props;
+    const { indexes, i, x, y, rot, scale, trans, bind, data } = this.props;
     const {
       product_name,
       product_url,
@@ -25,7 +25,7 @@ class ProductCard extends React.Component {
         }}
       >
         <animated.div
-          {...bind(i)}
+          {...bind(i, indexes)}
           style={{
             transform: interpolate([rot, scale], trans)
           }}

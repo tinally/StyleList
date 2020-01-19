@@ -93,7 +93,9 @@ def find5largest(scores):
 def finder():
     likes = flask.request.args.get('liked')
     dislikes = flask.request.args.get('disliked')
-
+    print(likes)
+    print(dislikes)
+    print(len(df))
     if likes == "" and dislikes == "":
         max_indices = []
         for i in range(5):
