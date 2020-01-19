@@ -39,14 +39,15 @@ def train_fashion_model(labeled_questions):
     
     return model
 
-def get_similarity_scores(df, target_indices, full_sentence):
+def get_similarity_scores(df, full_sentence, likes_indices, dislikes_indices):
     scores = []
     target = full_sentence.split()
     for index, row in df.iterrows():
-        if index not in target_indices:
+        if index not in likes_indices and dislikes_indices:
             scores.append(model.n_similarity(target,row['colName'].split()))
         else:
-            scores.append(0)
+            # we do not want repeated images (that have been shown)
+            scores.append(-1)
     return scores
 
 def preprocess(df):
@@ -65,7 +66,7 @@ def preprocess(df):
         tokens_filtered = [w for w in tokens if not w in stop_words]
         final_tokens = remove_special_characters(" ".join(tokens_filtered))
         df.loc[index, 'colName'] = final_tokens
-        labeled_questions.append(TaggedDocument(final_tokens.split(), df[df.index == index].qid1))
+        labeled_questions.append(final_tokens.split())
     
     return labeled_questions
 
@@ -81,13 +82,18 @@ def find5largest(scores):
 
 @app.route('/')
 def finder():
-    ids = request.args.get('ids')
-    id_array = ids.split(",")
-    full_sentence = ""
-    for id in id_array:
-        full_sentence += df.loc[id, 'colName'] + " "
-    scores = get_similarity_scores(df, id_array, full_sentence)
-    max_indices = find5largest(scores)
+    likes = request.args.get('liked')
+    dislikes = request.args.get('disliked')
+
+    if likes == [] and dislikes == []:
+        max_indices = np.random.randint(len(df.index)-1, size=5)
+    else:
+        likes_indices = likes.split(",")
+        full_sentence = ""
+        for id in likes_indices:
+            full_sentence += df.loc[id, 'colName'] + " "
+        scores = get_similarity_scores(df, full_sentence, likes_indices, dislikes.split(","))
+        max_indices = find5largest(scores)
 
     output = ""
     for i in max_indices:
