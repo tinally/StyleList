@@ -88,11 +88,11 @@ function Home() {
           <Col sm={3}>
           </Col>
           <Col sm={6}>
-            <Button variant="outline-secondary" onClick={() => selectProduct('shoes')}>Shoes</Button>
-            <Button variant="outline-secondary" onClick={() => selectProduct('shirts')}>Shirts</Button>
-            <Button variant="outline-secondary" onClick={() => selectProduct('dresses')}>Dresses</Button>
-            <Button variant="outline-secondary" onClick={() => selectProduct('jackets')}>Jackets</Button>
-            <Button variant="outline-secondary" onClick={() => selectProduct('jeans')}>Jeans</Button>
+            <Button variant="secondary" onClick={() => selectProduct('shoes')}>Shoes</Button>
+            <Button variant="secondary" onClick={() => selectProduct('shirts')}>Shirts</Button>
+            <Button variant="secondary" onClick={() => selectProduct('dresses')}>Dresses</Button>
+            <Button variant="secondary" onClick={() => selectProduct('jackets')}>Jackets</Button>
+            <Button variant="secondary" onClick={() => selectProduct('jeans')}>Jeans</Button>
           </Col>
         </Form.Row>
       </Form.Group>
