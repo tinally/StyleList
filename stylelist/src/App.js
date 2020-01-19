@@ -8,7 +8,6 @@ import {
 import Home from './components/Home/Home';
 import ProductCard from './components/Card/ProductCard';
 import Deck from './components/Deck/Deck'
-import FooterNav from './components/Nav/FooterNav'
 
 
 function App() {
@@ -28,7 +27,6 @@ function App() {
           <Route path="/" component={Home} />
         </Switch>
       </Router>
-      <FooterNav />
     </div>
   );
 

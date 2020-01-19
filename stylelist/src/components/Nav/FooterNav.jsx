@@ -7,7 +7,7 @@ export default class FooterNav extends Component {
     return (
         
  
-        <div class="footer fixed-bottom" fixed="bootom" id="footer">
+        <div class="footer bottom" fixed="bootom" id="footer">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
@@ -22,11 +22,11 @@ export default class FooterNav extends Component {
                         </ul>
                     </div>
     
-                    <div class="col-md-6">
+                    <div class="col-md-6 text-center">
                         <h3> Info </h3>
-                        <ul>
-                            <li> <a href="https://hackmd.io/@oL21t-1oQeOuBjnwadhgpw/BygxYlgZU"> Documentation </a> </li>
-                            <li> <a href="https://github.com/tinally/stylelist"> Repository </a> </li>
+                        <ul class="float-left">
+                            <li> <div id="info-doc"><a href="https://hackmd.io/@oL21t-1oQeOuBjnwadhgpw/BygxYlgZU"> Documentation </a> </div></li>
+                            <li> <div id="info-doc"><a href="https://github.com/tinally/stylelist"> Repository </a></div> </li>
     
                         </ul>
                     </div>

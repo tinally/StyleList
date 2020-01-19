@@ -6,6 +6,7 @@ import {Button, Col, Row, Form, Carousel, Navbar} from 'react-bootstrap'
 import TypingEffect from '../TypingEffect/TypingEffect'
 import FooterNav from '../Nav/FooterNav'
 
+
 function Home() {
   const items = ['shoes', 'shirts', 'dresses', 'jackets', 'jeans'];
   const [index, setIndex] = useState(0);
@@ -41,7 +42,7 @@ function Home() {
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src="https://componentblox.com/wp-content/uploads/img-115.jpg"
+              src="./slide2.png"
               height="650em"
             />
             <Carousel.Caption>
@@ -97,7 +98,7 @@ function Home() {
         </Form.Row>
       </Form.Group>
 
-
+      <FooterNav />
     </div>
   );
 }
