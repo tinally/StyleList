@@ -26,15 +26,19 @@ def remove_special_characters(text):
     text = text.replace("main ", "")
     text = text.replace("color ", "")
     text = text.replace("see full details", "")
+    text = text.replace("/", "")
+    text = text.replace("  ", " ")
+    text = text.replace(" .", "")
+    text = text.replace("Free Shipping & Returns See more", "")
     return text
 
-def train_fashion_model(labeled_details):
+def train_fashion_model(labeled_questions):
     model = Doc2Vec(dm = 1, min_count=1, window=10, size=150, sample=1e-4, negative=10)
     model.build_vocab(labeled_questions)
 
     # Train the model with 20 epochs
     for epoch in range(20):
-        model.train(labeled_details,epochs=model.iter,total_examples=model.corpus_count)
+        model.train(labeled_questions,epochs=model.iter,total_examples=model.corpus_count)
         print("Epoch #{} is complete.".format(epoch+1))
     
     return model
@@ -42,22 +46,22 @@ def train_fashion_model(labeled_details):
 def get_similarity_scores(df, target, likes_indices, dislikes_indices):
     scores = []
     for index, row in df.iterrows():
-        if index not in likes_indices and dislikes_indices:
-            scores.append(model.n_similarity(target,row['links_details'].split() + row['links_more_details'].split(",")))
+        if (index not in likes_indices) and (index not in dislikes_indices):
+            scores.append(model.n_similarity(target, row['links_details'].split() + row['links_more_details'].split()))
         else:
             # we do not want repeated images (that have been shown)
-            scores.append(-1)
+            scores.append(0)
     return scores
 
 def preprocess(df):
     # Check for null values
-    df[df.isnull().any(axis=1)]
+    # df[df.isnull().any(axis=1)]
     
     # Drop rows with null Values
-    df.drop(df[df.isnull().any(axis=1)].index,inplace=True)
+    # df.drop(df[df.isnull().any(axis=1)].index,inplace=True)
 
     # Add a column for unique ids
-    df['id'] = [str(i) for i in range(len(df.index))]
+    df['id'] = [str(i) for i in range(df.shape[0])]
 
     # Remove stop words
     stop_words = set(stopwords.words('english'))
@@ -73,6 +77,7 @@ def preprocess(df):
         df.loc[index, 'links_details'] = final_q1
         df.loc[index, 'links_more_details'] = final_q2
         labeled_questions.append(TaggedDocument(final_q1.split() + final_q2.split(), df[df.index == index].id))
+    return labeled_questions
 
 def find5largest(scores):
     temp = scores[:]
@@ -89,15 +94,39 @@ def finder():
     likes = request.args.get('liked')
     dislikes = request.args.get('disliked')
 
-    if likes == [] and dislikes == []:
-        max_indices = np.random.randint(len(df.index)-1, size=5)
-    else:
-        likes_indices = likes.split(",")
-        target = []
+    if likes == "" and dislikes == "":
+        max_indices = []
+        for i in range(5):
+            c = np.random.randint(df.shape[0]-1)
+            while c in max_indices:
+                c = np.random.randint(df.shape[0]-1)
+            max_indices.append(c)
+    elif likes == "" and dislikes != "":
+        dislikes_indices = [int(i) for i in dislikes.split(",")]
+        max_indices = []
+        for i in range(5):
+            c = np.random.randint(df.shape[0]-1)
+            while c in max_indices or c in dislikes_indices:
+                c = np.random.randint(df.shape[0]-1)
+            max_indices.append(c)
+    elif likes != "":
+        likes_indices = [int(i) for i in likes.split(",")]
+        dict = {}
         for idx in likes_indices:
-            target += df.loc[idx, 'links_more_details'].split(",") + df.loc[idx, 'links_details'].split()
-        scores = get_similarity_scores(df, target, likes_indices, dislikes.split(","))
-        max_indices = find5largest(scores)
+            target = df.loc[idx, 'links_details'].split() + df.loc[idx, 'links_more_details'].split()
+            if dislikes == "":
+                scores = get_similarity_scores(df, target, likes_indices, [])
+            else:
+                dislikes_indices = [int(i) for i in dislikes.split(",")]
+                scores = get_similarity_scores(df, target, likes_indices, dislikes_indices)
+            max_indices = find5largest(scores)
+            for elem in max_indices:
+                if elem not in dict.keys() or dict[elem] < scores[elem]:
+                    dict[elem] = scores[elem]
+        sorted_dict = sorted(dict.items(), key=lambda x: x[1], reverse=True)
+        max_indices = []
+        for tup in sorted_dict[:5]:
+            max_indices.append(tup[0])
 
     output = ""
     for i in max_indices:
@@ -106,12 +135,13 @@ def finder():
 
 if __name__ == '__main__':
     # Import Data
-    df_original = pd.read_csv('women_jackets.csv')
+    df_original = pd.read_csv('scraped_data.csv')
     df = df_original[:]
 
-    labeled_details = preprocess(df)
+    labeled_questions = preprocess(df)
+    print(df)
 
-    model = train_fashion_model(labeled_details)
+    model = train_fashion_model(labeled_questions)
 
     app.run()
 
