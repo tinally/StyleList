@@ -69,17 +69,25 @@ const to = i => ({
 });
 const from = i => ({ rot: 0, scale: 1.5, y: -1000 });
 
-// const trans = (r, s) =>
-//   `perspective(1500px) rotateX(0deg) rotateY(${r /
-//     9}deg) rotateZ(${r}deg) scale(${s})`;
-
 const trans = (r, s) =>
   `perspective(1500px) rotateX(0 deg) rotateY(${r /
   0}deg) rotateZ(0deg) scale(${s})`;
 
-function Deck() {
+const liked = window.localStorage.getItem('liked') ? window.localStorage.getItem('liked').split(',') : [];
+const disliked = window.localStorage.getItem('disliked') ? window.localStorage.getItem('disliked').split(',') : [];
+
+console.log(liked, disliked);
+
+function Deck() { // TODO: Change Deck into a stateful component
   const [flipped, flip] = useState(false);
-  const data = flipped ? data_one : data_two;
+  const [data, setData] = useState(flipped ? data_one : data_two); //TODO: PLACEHOLDER
+  axios.get('http://localhost:5000/suggestions', { params: { liked: liked.join(","), disliked: disliked.join(",") } }).then((response) => {
+    setData(response); // TODO: Mould response into data
+  }).catch(error => {
+    console.log(error)
+    setData(flipped ? data_one : data_two); // Fallback incase backend is dead or unavailable
+    console.log(data);
+  });
 
   const [gone] = useState(() => new Set());
 
@@ -105,6 +113,11 @@ function Deck() {
         console.log(index)
         let direction = xDir < 0 ? "left" : "right"
         console.log(direction)
+        if (direction === 'left' && !disliked.includes(index.toString())) {
+          disliked.push(index); //ahould be id
+        } else if (!liked.includes(index.toString())) {
+          liked.push(index);
+        }
       }
 
       set(i => {
@@ -128,11 +141,9 @@ function Deck() {
       if (!down && gone.size === data.length) {
         // api call to backend
         flip(!flipped);
-        console.log(flipped);
-        // axios.get('http://localhost:5000/suggestions', { params: { liked: "", disliked: "" } }).then((response) => {
-        //   console.log(response)
-        // })
-
+        console.log(liked.join(","), disliked.join(","));
+        window.localStorage.setItem('liked', liked);
+        window.localStorage.setItem('disliked', disliked);
         setTimeout(() => gone.clear() || set(i => to(i)), 600);
       }
     }

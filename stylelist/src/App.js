@@ -5,8 +5,6 @@ import {
   Route,
   Switch
 } from "react-router-dom";
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
 import Home from './components/Home/Home';
 import ProductCard from './components/Card/ProductCard';
 import Deck from './components/Deck/Deck'
@@ -15,7 +13,7 @@ import FooterNav from './components/Nav/FooterNav'
 
 function App() {
   return (
-    <div className="bg">
+    <div className="background" >
       {/* <Navbar bg="dark" variant="dark">
         <Navbar.Brand href="/">StyleList</Navbar.Brand>
         <Nav className="mr-auto">
