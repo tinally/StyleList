@@ -5,8 +5,9 @@ import { useGesture } from "react-with-gesture";
 import ProductCard from "../Card/ProductCard";
 import "./Deck.css";
 import axios from "axios";
+import products from "./scraped_data";
 
-const data_one = [
+const mock_data = [
   {
     product_name: "Logo One-Piece Swimsuit",
     img_url: "https://n.nordstrommedia.com/id/sr3/a3c47a21-ad49-4b4f-ab47-715bc989ac44.jpeg?crop=pad&pad_color=FFF&format=jpeg&w=780&h=1196&dpr=1.5",
@@ -30,35 +31,23 @@ const data_one = [
     details: "This diamond-quilted coat features innovative 37.5® thermoregulation technology that both evaporates moisture and traps body heat to keep you comfortable.",
     color_url_list: ["https://n.nordstrommedia.com/id/sr3/73634bea-b154-4f69-9a2a-ef00e7641424.jpeg?crop=fit&w=31&h=31", "https://n.nordstrommedia.com/id/sr3/73634bea-b154-4f69-9a2a-ef00e7641424.jpeg?crop=fit&w=31&h=31"],
     price: 1301.50
+  },{
+    product_name: "Jacquard Stripe Sleeve Piqué Polo",
+    img_url: "https://n.nordstrommedia.com/id/sr3/59069faa-6f1b-4144-ab43-66c3d780ad6d.jpeg?crop=pad&pad_color=FFF&format=jpeg&w=780&h=1196",
+    product_url: "https://shop.nordstrom.com/s/gucci-jacquard-stripe-sleeve-pique-polo/4787761/full?origin=category-personalizedsort&breadcrumb=Home%2FBrands%2FGucci&color=black",
+    details: "Gucci-branded stripe trim edges the shoulders of a classic stretch-piqué polo topped with a contrasting tipped collar.",
+    color_url_list: ["https://n.nordstrommedia.com/id/sr3/c6cf4b3d-64e9-440a-8c5d-f74c333f58f3.jpeg?crop=fit&w=31&h=31"],
+    price: 931
+  },{
+    product_name: "Jacquard Stripe Sleeve Piqué Polo",
+    img_url: "https://n.nordstrommedia.com/id/sr3/59069faa-6f1b-4144-ab43-66c3d780ad6d.jpeg?crop=pad&pad_color=FFF&format=jpeg&w=780&h=1196",
+    product_url: "https://shop.nordstrom.com/s/gucci-jacquard-stripe-sleeve-pique-polo/4787761/full?origin=category-personalizedsort&breadcrumb=Home%2FBrands%2FGucci&color=black",
+    details: "Gucci-branded stripe trim edges the shoulders of a classic stretch-piqué polo topped with a contrasting tipped collar.",
+    color_url_list: ["https://n.nordstrommedia.com/id/sr3/c6cf4b3d-64e9-440a-8c5d-f74c333f58f3.jpeg?crop=fit&w=31&h=31"],
+    price: 931
   },
 
 ];
-
-const data_two =
-  [
-    {
-      product_name: "Jacquard Stripe Sleeve Piqué Polo",
-      img_url: "https://n.nordstrommedia.com/id/sr3/59069faa-6f1b-4144-ab43-66c3d780ad6d.jpeg?crop=pad&pad_color=FFF&format=jpeg&w=780&h=1196",
-      product_url: "https://shop.nordstrom.com/s/gucci-jacquard-stripe-sleeve-pique-polo/4787761/full?origin=category-personalizedsort&breadcrumb=Home%2FBrands%2FGucci&color=black",
-      details: "Gucci-branded stripe trim edges the shoulders of a classic stretch-piqué polo topped with a contrasting tipped collar.",
-      color_url_list: ["https://n.nordstrommedia.com/id/sr3/c6cf4b3d-64e9-440a-8c5d-f74c333f58f3.jpeg?crop=fit&w=31&h=31"],
-      price: 931
-    }, {
-      product_name: "Jacquard Stripe Sleeve Piqué Polo",
-      img_url: "https://n.nordstrommedia.com/id/sr3/59069faa-6f1b-4144-ab43-66c3d780ad6d.jpeg?crop=pad&pad_color=FFF&format=jpeg&w=780&h=1196",
-      product_url: "https://shop.nordstrom.com/s/gucci-jacquard-stripe-sleeve-pique-polo/4787761/full?origin=category-personalizedsort&breadcrumb=Home%2FBrands%2FGucci&color=black",
-      details: "Gucci-branded stripe trim edges the shoulders of a classic stretch-piqué polo topped with a contrasting tipped collar.",
-      color_url_list: ["https://n.nordstrommedia.com/id/sr3/c6cf4b3d-64e9-440a-8c5d-f74c333f58f3.jpeg?crop=fit&w=31&h=31"],
-      price: 931
-    }, {
-      product_name: "Jacquard Stripe Sleeve Piqué Polo",
-      img_url: "https://n.nordstrommedia.com/id/sr3/59069faa-6f1b-4144-ab43-66c3d780ad6d.jpeg?crop=pad&pad_color=FFF&format=jpeg&w=780&h=1196",
-      product_url: "https://shop.nordstrom.com/s/gucci-jacquard-stripe-sleeve-pique-polo/4787761/full?origin=category-personalizedsort&breadcrumb=Home%2FBrands%2FGucci&color=black",
-      details: "Gucci-branded stripe trim edges the shoulders of a classic stretch-piqué polo topped with a contrasting tipped collar.",
-      color_url_list: ["https://n.nordstrommedia.com/id/sr3/c6cf4b3d-64e9-440a-8c5d-f74c333f58f3.jpeg?crop=fit&w=31&h=31"],
-      price: 931
-    }
-  ];
 
 const to = i => ({
   x: 0,
@@ -78,14 +67,16 @@ const disliked = window.localStorage.getItem('disliked') ? window.localStorage.g
 
 console.log(liked, disliked);
 
-function Deck() { // TODO: Change Deck into a stateful component
+function Deck() {
   const [flipped, flip] = useState(false);
-  const [data, setData] = useState(flipped ? data_one : data_two); //TODO: PLACEHOLDER
+  const [data, setData] = useState(mock_data);
   axios.get('http://localhost:5000/suggestions', { params: { liked: liked.join(","), disliked: disliked.join(",") } }).then((response) => {
-    setData(response); // TODO: Mould response into data
+    setData(response.data.items.map(index => products.women_jackets[index]));
+    response.data.items.forEach(item => console.log(item, products.women_jackets[item]))
+    response.data.items.map(index => products.women_jackets[index])
   }).catch(error => {
     console.log(error)
-    setData(flipped ? data_one : data_two); // Fallback incase backend is dead or unavailable
+    setData(mock_data); // Fallback incase backend is dead or unavailable
     console.log(data);
   });
 

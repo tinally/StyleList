@@ -10,9 +10,8 @@ class ProductCard extends React.Component {
       product_name,
       product_url,
       img_url,
-      color_url_list,
+      // color_url_list,
       details,
-      price
     } = data[i];
 
     return (
@@ -31,7 +30,7 @@ class ProductCard extends React.Component {
             transform: interpolate([rot, scale], trans)
           }}
         >
-          {color_url_list.map((color_url, index) => {
+          {/* {color_url_list.map((color_url, index) => {
                 return (
                   <img
                     className="color_bar mr-1"
@@ -40,7 +39,7 @@ class ProductCard extends React.Component {
                     key={index}
                   />
                 );
-              })}
+              })} */}
           <Card className="product-card" style={{ width: "20rem", minHeight: "200px", maxHeight:"400rpx" }}>
             
             <Card.Img className="card_image" variant="top" src={img_url} />

@@ -14,8 +14,8 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 
-from flask import Flask, request
-app = Flask(__name__)
+import flask
+app = flask.Flask(__name__)
 
 # Special Characters
 def remove_special_characters(text):
@@ -89,10 +89,10 @@ def find5largest(scores):
         indices.append(scores.index(val))
     return indices
 
-@app.route('/')
+@app.route('/suggestions', methods=['GET'])
 def finder():
-    likes = request.args.get('liked')
-    dislikes = request.args.get('disliked')
+    likes = flask.request.args.get('liked')
+    dislikes = flask.request.args.get('disliked')
 
     if likes == "" and dislikes == "":
         max_indices = []
@@ -131,7 +131,9 @@ def finder():
     output = ""
     for i in max_indices:
         output += str(i) + ","
-    return output[:-1]
+    response = flask.jsonify({'items': max_indices})
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 if __name__ == '__main__':
     # Import Data
