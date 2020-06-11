@@ -1,5 +1,4 @@
-## UofT Hacks VII 2nd Place
-https://devpost.com/software/stylelist-bepj0v
+### Won 2nd Place at UofT Hacks VII 2020
 
 ## Inspiration
 Fashion has always been a world that seemed far away from tech. We want to bridge this gap with "StyleList", which understands your fashion within a few swipes and makes personalized suggestions for your daily outfits. When you and I visit the Nordstorm website, we see the exact same product page. But we could have completely different styles and preferences. With Machine Intelligence, StyleList makes it convenient for people to figure out what they want to wear (you simply swipe!) and it also allows people to discover a trend that they favor! 
